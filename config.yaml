@@ -1,0 +1,8 @@
+# config.yaml
+port: 8099
+socketport: 8088
+name: "SatmineIndexer"
+dbpath_: "E:\\Temp\\db"
+dbpath_t: "E:\\Temp\\db_testnet"
+dbpath: "E:\\mrc20db\\real\\db"
+recpath: "E:\\mrc20db\\real\\rec"

@@ -1,0 +1,1587 @@
+basePath: /api/v1
+definitions:
+  rpc.GetAddressMrc20BarData:
+    properties:
+      bars:
+        items:
+          $ref: '#/definitions/satmine.WebMrc20Bar'
+        type: array
+    type: object
+  rpc.GetAddressMrc20BarResult:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/rpc.GetAddressMrc20BarData'
+      message:
+        type: string
+    type: object
+  rpc.GetAddressMrc20ListData:
+    properties:
+      all_count:
+        type: integer
+      list:
+        items:
+          $ref: '#/definitions/satmine.WebMrc20Inscription'
+        type: array
+    type: object
+  rpc.GetAddressMrc20ListResult:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/rpc.GetAddressMrc20ListData'
+      message:
+        type: string
+    type: object
+  rpc.GetAddressMrc721BarPlusData:
+    properties:
+      bars:
+        items:
+          $ref: '#/definitions/satmine.WebMrc721Bar'
+        type: array
+    type: object
+  rpc.GetAddressMrc721BarPlusResult:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/rpc.GetAddressMrc721BarPlusData'
+      message:
+        type: string
+    type: object
+  rpc.GetAddressMrc721BarResult:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          type: string
+        type: array
+      message:
+        type: string
+    type: object
+  rpc.GetAddressMrc721HoldersData:
+    properties:
+      all_count:
+        type: integer
+      holders:
+        items:
+          $ref: '#/definitions/satmine.WebMrc721Holder'
+        type: array
+    type: object
+  rpc.GetAddressMrc721HoldersResult:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/rpc.GetAddressMrc721HoldersData'
+      message:
+        type: string
+    type: object
+  rpc.GetBurnInfoResult:
+    properties:
+      code:
+        description: Response code
+        type: integer
+      data:
+        allOf:
+        - $ref: '#/definitions/satmine.WebBurnInfo'
+        description: Burn information data
+      message:
+        description: Response message
+        type: string
+    type: object
+  rpc.GetGenesisDataResult:
+    properties:
+      code:
+        description: Status code of the response
+        type: integer
+      data:
+        allOf:
+        - $ref: '#/definitions/satmine.Mrc721GenesisData'
+        description: Genesis data of a MRC-721 name
+      message:
+        description: Description message about the result
+        type: string
+    type: object
+  rpc.GetInscriptionResult:
+    properties:
+      code:
+        description: HTTP status code
+        type: integer
+      data:
+        allOf:
+        - $ref: '#/definitions/satmine.HookInscription'
+        description: Data payload containing the inscription details, nil if error
+          occurs
+      message:
+        description: Descriptive message about the result
+        type: string
+    type: object
+  rpc.GetLotteryListData:
+    properties:
+      lotteries:
+        items:
+          $ref: '#/definitions/satmine.LotteryData'
+        type: array
+    type: object
+  rpc.GetLotteryListResult:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/rpc.GetLotteryListData'
+      message:
+        type: string
+    type: object
+  rpc.GetMrc721CollectionsResult:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/satmine.WebCollections'
+        type: array
+      message:
+        type: string
+    type: object
+  rpc.InscriptionNumber:
+    properties:
+      classic:
+        type: integer
+      jubilee:
+        type: integer
+    type: object
+  rpc.OrdHookBlock:
+    properties:
+      block_identifier:
+        $ref: '#/definitions/rpc.OrdHookBlockIdentifier'
+      metadata:
+        additionalProperties: true
+        type: object
+      parent_block_identifier:
+        $ref: '#/definitions/rpc.OrdHookBlockIdentifier'
+      timestamp:
+        type: integer
+      transactions:
+        items:
+          $ref: '#/definitions/rpc.OrdHookTransaction'
+        type: array
+    type: object
+  rpc.OrdHookBlockIdentifier:
+    properties:
+      hash:
+        type: string
+      index:
+        type: integer
+    type: object
+  rpc.OrdHookChain:
+    properties:
+      is_streaming_blocks:
+        type: boolean
+      predicate:
+        $ref: '#/definitions/rpc.OrdHookPredicate'
+      uuid:
+        type: string
+    type: object
+  rpc.OrdHookDestination:
+    properties:
+      type:
+        type: string
+      value:
+        type: string
+    type: object
+  rpc.OrdHookEvent:
+    properties:
+      apply:
+        items:
+          $ref: '#/definitions/rpc.OrdHookBlock'
+        type: array
+      chainhook:
+        $ref: '#/definitions/rpc.OrdHookChain'
+      rollback:
+        description: Assuming rollback has a similar structure
+        items: {}
+        type: array
+    type: object
+  rpc.OrdHookInscriptionRevealed:
+    properties:
+      content_bytes:
+        type: string
+      content_length:
+        type: integer
+      content_type:
+        type: string
+      curse_type:
+        description: Assuming curse_type can be null, hence using a pointer
+        type: string
+      inscriber_address:
+        type: string
+      inscription_fee:
+        type: integer
+      inscription_id:
+        type: string
+      inscription_input_index:
+        type: integer
+      inscription_number:
+        $ref: '#/definitions/rpc.InscriptionNumber'
+      inscription_output_value:
+        type: integer
+      ordinal_block_height:
+        type: integer
+      ordinal_number:
+        type: integer
+      ordinal_offset:
+        type: integer
+      satpoint_post_inscription:
+        type: string
+      transfers_pre_inscription:
+        type: integer
+      tx_index:
+        type: integer
+    type: object
+  rpc.OrdHookInscriptionTransferred:
+    properties:
+      destination:
+        $ref: '#/definitions/rpc.OrdHookDestination'
+      inscription_id:
+        type: string
+      post_transfer_output_value:
+        type: integer
+      satpoint_post_transfer:
+        type: string
+      satpoint_pre_transfer:
+        type: string
+      tx_index:
+        type: integer
+    type: object
+  rpc.OrdHookOrdinalOperation:
+    properties:
+      inscription_revealed:
+        $ref: '#/definitions/rpc.OrdHookInscriptionRevealed'
+      inscription_transferred:
+        $ref: '#/definitions/rpc.OrdHookInscriptionTransferred'
+    type: object
+  rpc.OrdHookPredicate:
+    properties:
+      operation:
+        type: string
+      scope:
+        type: string
+    type: object
+  rpc.OrdHookTransaction:
+    properties:
+      metadata:
+        $ref: '#/definitions/rpc.OrdHookTransactionMetadata'
+      operations:
+        items: {}
+        type: array
+      transaction_identifier:
+        $ref: '#/definitions/rpc.OrdHookBlockIdentifier'
+    type: object
+  rpc.OrdHookTransactionMetadata:
+    properties:
+      ordinal_operations:
+        items:
+          $ref: '#/definitions/rpc.OrdHookOrdinalOperation'
+        type: array
+      proof: {}
+    type: object
+  rpc.ScanMissingBlocksResult:
+    properties:
+      code:
+        type: integer
+      data:
+        description: Omitempty will not show "data" in JSON if it's null
+        items:
+          type: integer
+        type: array
+      message:
+        type: string
+    type: object
+  rpc.WebMrcAllInscriptionResult:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/satmine.WebMrcAllInscription'
+      message:
+        type: string
+    type: object
+  satmine.Burn:
+    properties:
+      boost:
+        type: string
+      unit:
+        type: string
+    type: object
+  satmine.HookBlock:
+    properties:
+      block_hash:
+        type: string
+      block_height:
+        type: string
+      inscriptions:
+        items:
+          $ref: '#/definitions/satmine.HookInscription'
+        type: array
+      timestamp:
+        type: integer
+      transfers:
+        items:
+          $ref: '#/definitions/satmine.HookTransfer'
+        type: array
+    type: object
+  satmine.HookInscription:
+    properties:
+      address:
+        type: string
+      block_height:
+        type: integer
+      content_byte:
+        description: binary data
+        items:
+          type: integer
+        type: array
+      content_length:
+        type: integer
+      content_type:
+        type: string
+      curse_type:
+        type: string
+      id:
+        type: string
+      inscription_fee:
+        type: integer
+      inscription_input_index:
+        type: integer
+      inscription_output_value:
+        type: integer
+      number:
+        type: integer
+      offset:
+        type: string
+      ordinal_height:
+        type: integer
+      sat:
+        type: integer
+      satpoint_post_inscription:
+        type: string
+      transfers_pre_inscription:
+        type: integer
+      tx_index:
+        type: integer
+    type: object
+  satmine.HookTransfer:
+    properties:
+      id:
+        type: string
+      post_transfer_output_value:
+        type: integer
+      satpoint_post_transfer:
+        type: string
+      satpoint_pre_transfer:
+        type: string
+      to_address:
+        type: string
+      tx_index:
+        type: integer
+      type:
+        type: string
+    type: object
+  satmine.Lottery:
+    properties:
+      dist:
+        type: string
+      intvl:
+        type: string
+      pool:
+        type: string
+      winp:
+        type: string
+    type: object
+  satmine.LotteryData:
+    properties:
+      address:
+        type: string
+      block_hash:
+        type: string
+      block_height:
+        type: string
+      dist:
+        type: string
+      inscription_id:
+        type: string
+      jackpot_accum:
+        type: string
+      mrc721name:
+        type: string
+      number:
+        type: integer
+      round:
+        type: integer
+      timestamp:
+        type: integer
+      win_amount:
+        type: string
+      winp:
+        type: string
+    type: object
+  satmine.MRC20Protocol:
+    properties:
+      amt:
+        type: string
+      dec:
+        description: Pointer to allow the field to be empty
+        type: string
+      insc:
+        type: string
+      op:
+        type: string
+      p:
+        type: string
+      tick:
+        type: string
+    type: object
+  satmine.MRC721Protocol:
+    properties:
+      burn:
+        allOf:
+        - $ref: '#/definitions/satmine.Burn'
+        description: Pointer to allow the field to be empty
+      ltry:
+        allOf:
+        - $ref: '#/definitions/satmine.Lottery'
+        description: Pointer to allow the field to be empty
+      miner:
+        $ref: '#/definitions/satmine.Miner'
+      p:
+        type: string
+      token:
+        $ref: '#/definitions/satmine.Token'
+    type: object
+  satmine.Miner:
+    properties:
+      lim:
+        type: string
+      max:
+        type: string
+      name:
+        type: string
+    type: object
+  satmine.Mrc721GenesisData:
+    properties:
+      block_height:
+        description: Height of the block in the blockchain where the inscription was
+          recorded
+        type: string
+      end_block_height:
+        description: The block height of the inscription that ended the mining round
+        type: string
+      end_id:
+        description: The ID of the inscription that ended the mining round
+        type: string
+      end_timestamp:
+        description: The timestamp of the block in the blockchain where the inscription
+          that ended the mining round was recorded
+        type: integer
+      genesis_address:
+        description: Address associated with the genesis transaction of the inscription
+        type: string
+      genesis_block_height:
+        description: Height of the block in the blockchain where the genesis transaction
+          of the inscription was recorded
+        type: string
+      genesis_timestamp:
+        description: Timestamp of the block in the blockchain where the genesis transaction
+          of the inscription was recorded
+        type: integer
+      id:
+        description: Unique identifier for the inscription
+        type: string
+      inscriptions_count:
+        description: Total count of inscriptions
+        type: integer
+      inscriptions_max:
+        description: Total count of inscriptions
+        type: integer
+      mined_tokens:
+        description: The amount of tokens that have been mined
+        type: string
+      name:
+        description: Name for the inscription
+        type: string
+      number:
+        description: Number for the inscription
+        type: integer
+      previous_name:
+        description: Previous name for the inscription
+        type: string
+      previous_tick:
+        description: Previous The token ticker brc20name
+        type: string
+      prize_pool_tokens:
+        description: The amount of tokens that have been added to the prize pool
+        type: string
+      tick:
+        description: The token ticker brc20name
+        type: string
+      total_burn:
+        description: The total burn
+        type: string
+      total_prize_pool_tokens:
+        description: The cumulative total of tokens in the prize pool
+        type: string
+      total_prize_round:
+        description: The total prize round
+        type: integer
+    type: object
+  satmine.Mrc721GenesisDataWeb:
+    properties:
+      block_height:
+        description: Height of the block in the blockchain where the inscription was
+          recorded
+        type: string
+      genesis_address:
+        description: Address associated with the genesis transaction of the inscription
+        type: string
+      holders:
+        description: Total Holders
+        type: integer
+      id:
+        description: Unique identifier for the inscription
+        type: string
+      inscriptions_count:
+        description: Total count of inscriptions
+        type: integer
+      inscriptions_max:
+        description: Total count of inscriptions
+        type: integer
+      mined_tokens:
+        description: The amount of tokens that have been mined
+        type: string
+      mrc20_holders:
+        description: mrc20_holders
+        type: integer
+      mrc20_json:
+        description: mrc20_json
+        type: string
+      mrc721_img_id:
+        description: mrc721_img_id
+        type: string
+      name:
+        description: Name for the inscription
+        type: string
+      number:
+        description: Number for the inscription
+        type: integer
+      previous_name:
+        description: Previous name for the inscription
+        type: string
+      previous_tick:
+        description: Previous The token ticker brc20name
+        type: string
+      prize_pool_tokens:
+        description: The amount of tokens that have been added to the prize pool
+        type: string
+      tick:
+        description: The token ticker brc20name
+        type: string
+      total_prize_pool_tokens:
+        description: The cumulative total of tokens in the prize pool
+        type: string
+    type: object
+  satmine.SimpleHookBlock:
+    properties:
+      block_hash:
+        type: string
+      block_height:
+        type: string
+      timestamp:
+        type: integer
+    type: object
+  satmine.Token:
+    properties:
+      beg:
+        type: string
+      dcr:
+        type: string
+      halv:
+        type: string
+      tick:
+        type: string
+      total:
+        type: string
+    type: object
+  satmine.WebBurnInfo:
+    properties:
+      balance:
+        type: string
+      boost:
+        type: string
+      burn_amount:
+        type: string
+      burn_max:
+        type: string
+      mrc20name:
+        type: string
+      mrc721name:
+        type: string
+      power:
+        type: string
+      unit:
+        type: string
+    type: object
+  satmine.WebCollectionItem:
+    properties:
+      name:
+        type: string
+    type: object
+  satmine.WebCollections:
+    properties:
+      id:
+        type: string
+      meta:
+        $ref: '#/definitions/satmine.WebCollectionItem'
+    type: object
+  satmine.WebInscription:
+    properties:
+      inscription:
+        $ref: '#/definitions/satmine.HookInscription'
+      mined_amount:
+        description: Number of final digs per inscription
+        type: string
+      mrc20name:
+        type: string
+      mrc721name:
+        type: string
+      power:
+        description: The arithmetic value of each inscription, determined by the BurnNum
+          parameter, defaults to 1000.
+        type: string
+    type: object
+  satmine.WebMrc20Bar:
+    properties:
+      avaliable:
+        type: string
+      balance:
+        type: string
+      mrc20name:
+        type: string
+      transferable:
+        type: string
+    type: object
+  satmine.WebMrc20Inscription:
+    properties:
+      amount:
+        type: string
+      inscription:
+        $ref: '#/definitions/satmine.HookInscription'
+      mrc20name:
+        type: string
+    type: object
+  satmine.WebMrc721Bar:
+    properties:
+      amount:
+        type: string
+      block_height:
+        type: integer
+      first_721_id:
+        type: string
+      mrc20name:
+        type: string
+      mrc721name:
+        type: string
+      total_power:
+        type: string
+      total_reward:
+        type: string
+    type: object
+  satmine.WebMrc721Holder:
+    properties:
+      address:
+        type: string
+      amount:
+        type: string
+      percentage:
+        type: string
+      rank:
+        type: string
+    type: object
+  satmine.WebMrcAllInscription:
+    properties:
+      genesis_data:
+        $ref: '#/definitions/satmine.Mrc721GenesisData'
+      inscription:
+        $ref: '#/definitions/satmine.HookInscription'
+      mrc_type:
+        type: string
+      mrc20_protocol:
+        $ref: '#/definitions/satmine.MRC20Protocol'
+      mrc721_protocol:
+        $ref: '#/definitions/satmine.MRC721Protocol'
+    type: object
+info:
+  contact: {}
+  description: Mining Protocol for Inscription Miners Based on the BTC Ordinals Protocol
+  termsOfService: https://github.com/SatMine/
+  title: BTC Ordinals Mining Protocol
+  version: "1.01"
+paths:
+  /mrc20/addressbalance:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves the balance for a specific address and token (tick)
+      parameters:
+      - description: Address
+        in: query
+        name: address
+        required: true
+        type: string
+      - description: Token ticker
+        in: query
+        name: tick
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Balance of the token for the specified address
+          schema:
+            type: string
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve the balance for a specific address and token
+      tags:
+      - mrc20
+  /mrc20/addressbalances:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves all token balances associated with a given address
+      parameters:
+      - description: Address
+        in: query
+        name: address
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Array of balances for each token
+          schema:
+            items:
+              additionalProperties:
+                type: string
+              type: object
+            type: array
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve all token balances for a specific address
+      tags:
+      - mrc20
+  /mrc20/addressinfo:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves inscription IDs for both MRC721 and MRC20 tokens associated
+        with a given address
+      parameters:
+      - description: User Address
+        in: query
+        name: address
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Inscription IDs for MRC721 and MRC20 tokens
+          schema:
+            additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve inscription IDs for both MRC721 and MRC20 tokens
+      tags:
+      - mrc20
+  /mrc20/addressmrc20bar:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a list of MRC-20 balances for a given address, showing
+        each token's name and available balance. If a token name is provided, filter
+        the results accordingly.
+      parameters:
+      - description: Address
+        in: query
+        name: address
+        required: true
+        type: string
+      - description: MRC20 Token Name
+        in: query
+        name: mrc20Name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of MRC-20 balances
+          schema:
+            $ref: '#/definitions/rpc.GetAddressMrc20BarResult'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve a list of MRC-20 balances for a given address, optionally
+        filtered by token name
+      tags:
+      - mrc20
+  /mrc20/addressmrc20list:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a paginated list of MRC-20 inscriptions for a given address
+        and MRC-20 name, sorted by inscription number
+      parameters:
+      - description: Address
+        in: query
+        name: address
+        required: true
+        type: string
+      - description: MRC-20 Name
+        in: query
+        name: mrc20name
+        type: string
+      - default: 0
+        description: Page Index
+        in: query
+        name: pageIndex
+        type: integer
+      - default: 100
+        description: Page Size
+        in: query
+        name: pageSize
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of MRC-20 inscriptions
+          schema:
+            $ref: '#/definitions/rpc.GetAddressMrc20ListResult'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve a paginated list of MRC-20 inscriptions for a given address
+      tags:
+      - mrc20
+  /mrc20/addressmrc721bar:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a list of unique MRC-721 inscriptions associated with
+        a given address
+      parameters:
+      - description: Address to query MRC-721 inscriptions
+        in: query
+        name: address
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of unique MRC-721 inscription names
+          schema:
+            $ref: '#/definitions/rpc.GetAddressMrc721BarResult'
+        "501":
+          description: Error message if retrieval fails
+          schema:
+            $ref: '#/definitions/rpc.GetAddressMrc721BarResult'
+      summary: Retrieve MRC-721 inscriptions by address
+      tags:
+      - mrc20
+  /mrc20/addressmrc721barplus:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves statistics like total amount, total power, and total
+        reward of MRC-721 inscriptions for a given address
+      parameters:
+      - description: Address
+        in: query
+        name: address
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Statistics of MRC-721 inscriptions
+          schema:
+            $ref: '#/definitions/rpc.GetAddressMrc721BarPlusResult'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve statistics of MRC-721 inscriptions for a given address
+      tags:
+      - mrc20
+  /mrc20/addressmrc721holders:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a paginated list of MRC-721 holders for a given MRC-721
+        name, sorted by the number of inscriptions per address in descending order
+      parameters:
+      - description: MRC-721 Name
+        in: query
+        name: mrc721name
+        required: true
+        type: string
+      - default: 0
+        description: Page Index
+        in: query
+        name: pageIndex
+        type: integer
+      - default: 100
+        description: Page Size
+        in: query
+        name: pageSize
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of MRC-721 holders along with the total count
+          schema:
+            $ref: '#/definitions/rpc.GetAddressMrc721HoldersResult'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve a paginated list of MRC-721 holders for a given MRC-721 name
+      tags:
+      - mrc20
+  /mrc20/addressmrc721list:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a paginated list of MRC-721 inscriptions for a given
+        address and MRC-721 name, sorted by inscription number
+      parameters:
+      - description: Address
+        in: query
+        name: address
+        required: true
+        type: string
+      - description: MRC-721 Name
+        in: query
+        name: mrc721name
+        type: string
+      - default: 0
+        description: Page Index
+        in: query
+        name: pageIndex
+        type: integer
+      - default: 100
+        description: Page Size
+        in: query
+        name: pageSize
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of MRC-721 inscriptions
+          schema:
+            items:
+              $ref: '#/definitions/satmine.WebInscription'
+            type: array
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve a paginated list of MRC-721 inscriptions for a given address
+      tags:
+      - mrc20
+  /mrc20/allmrc721:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves all MRC-721 genesis inscriptions and sorts them by number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of MRC-721 genesis inscriptions
+          schema:
+            items:
+              $ref: '#/definitions/satmine.Mrc721GenesisDataWeb'
+            type: array
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve all MRC-721 genesis inscriptions
+      tags:
+      - mrc20
+  /mrc20/blockbyhash:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a block from the blockchain by its specified hash
+      parameters:
+      - description: Block Hash
+        in: query
+        name: blockHash
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Block information
+          schema:
+            $ref: '#/definitions/satmine.HookBlock'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve a block by its hash
+      tags:
+      - mrc20
+  /mrc20/blockbyheight:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a block from the blockchain by its specified height
+      parameters:
+      - description: Block Height
+        in: query
+        name: blockHeight
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Block information
+          schema:
+            $ref: '#/definitions/satmine.HookBlock'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve a block by its height
+      tags:
+      - mrc20
+  /mrc20/blocks:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves blocks from the blockchain based on a starting block
+        height and an offset
+      parameters:
+      - description: Starting Block Height
+        in: query
+        name: blockHeight
+        required: true
+        type: string
+      - description: Offset Height
+        in: query
+        name: offsetHeight
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Array of blocks
+          schema:
+            items:
+              $ref: '#/definitions/satmine.SimpleHookBlock'
+            type: array
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve blocks within a range
+      tags:
+      - mrc20
+  /mrc20/burninfo:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves burn information including balance, power, burn amount,
+        and other relevant details for a given inscription ID
+      parameters:
+      - description: Inscription ID
+        in: query
+        name: inscriptionID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Burn information for the inscription
+          schema:
+            $ref: '#/definitions/rpc.GetBurnInfoResult'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve burn information for a specific inscription
+      tags:
+      - mrc20
+  /mrc20/genesisdata:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves genesis data including identification details and statistics
+        relevant to the inscription of a given MRC-721 name
+      parameters:
+      - description: MRC-721 name
+        in: query
+        name: mrc721name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Genesis data of the specified MRC-721 name
+          schema:
+            $ref: '#/definitions/rpc.GetGenesisDataResult'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve genesis data for a given MRC-721 name
+      tags:
+      - mrc20
+  /mrc20/genesisprotocol:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves the genesis protocol data for a given MRC721 name
+      parameters:
+      - description: MRC721 Name
+        in: query
+        name: mrc721name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: The MRC721 genesis protocol data
+          schema:
+            $ref: '#/definitions/satmine.MRC721Protocol'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve MRC721 genesis protocol
+      tags:
+      - mrc20
+  /mrc20/getrecords:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a list of records based on address, record type, page
+        number, page size, and order
+      parameters:
+      - description: Address identifier
+        in: query
+        name: address
+        required: true
+        type: string
+      - description: Record type identifier
+        in: query
+        name: rectype
+        required: true
+        type: string
+      - description: Page number for pagination
+        in: query
+        name: pageNum
+        required: true
+        type: integer
+      - description: Number of records per page
+        in: query
+        name: pageSize
+        required: true
+        type: integer
+      - description: Order of record retrieval (true for ascending, false for descending)
+        in: query
+        name: ascend
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of records
+          schema:
+            items:
+              type: string
+            type: array
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve records from the database
+      tags:
+      - record
+  /mrc20/hookevents:
+    post:
+      consumes:
+      - application/json
+      description: Parses and processes events related to OrdHook.
+      parameters:
+      - description: Event Payload
+        in: body
+        name: event
+        required: true
+        schema:
+          $ref: '#/definitions/rpc.OrdHookEvent'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: A message confirming successful processing
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Error message in case of failure to process the event
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Process OrdHook events
+      tags:
+      - OrdHook
+  /mrc20/inscription:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves the inscription information for a given inscription ID
+      parameters:
+      - description: Inscription ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Inscription information wrapped in a result structure
+          schema:
+            $ref: '#/definitions/rpc.GetInscriptionResult'
+        "400":
+          description: Error message and code if retrieval fails
+          schema:
+            $ref: '#/definitions/rpc.GetInscriptionResult'
+      summary: Retrieve inscription information by ID
+      tags:
+      - mrc20
+  /mrc20/inscriptionplus:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves the inscription information for a given inscription ID
+      parameters:
+      - description: Inscription ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Inscription information
+          schema:
+            $ref: '#/definitions/satmine.HookInscription'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve inscription information by ID
+      tags:
+      - mrc20
+  /mrc20/latestblock:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves the most recent block number from the blockchain
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: The latest block number
+          schema:
+            type: string
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve the latest block number
+      tags:
+      - mrc20
+  /mrc20/lotterylist:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a list of lottery data including block height, address,
+        inscription ID, and win amount for a specific MRC-721 name
+      parameters:
+      - description: MRC-721 Name
+        in: query
+        name: mrc721name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Lottery data list for the specified MRC-721 name
+          schema:
+            $ref: '#/definitions/rpc.GetLotteryListResult'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve lottery data list for a given MRC-721 name
+      tags:
+      - mrc20
+  /mrc20/miningprofitchart:
+    post:
+      consumes:
+      - application/json
+      description: Parses input JSON into MRC721Protocol format and returns it
+      parameters:
+      - description: MRC721Protocol JSON data
+        example: '"{\"p\": \"mrc-721\", \"miner\": {\"name\": \"Demo 721\", \"max\":
+          \"100\", \"lim\":\"5\"}, \"token\": {\"tick\": \"coin\", \"total\": \"2100000000000000\",
+          \"beg\": \"50000000000\", \"halv\": \"10\", \"dcr\": \"0.555\"}, \"ltry\":
+          {\"pool\": \"0.05\", \"intvl\": \"9\", \"winp\": \"0.10\", \"dist\": \"0.60\"},
+          \"burn\": {\"unit\": \"8000000000\", \"boost\": \"0.05\"}}"'
+        in: body
+        name: data
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Parsed MRC721Protocol data
+          schema:
+            $ref: '#/definitions/satmine.MRC721Protocol'
+        "400":
+          description: Invalid input
+          schema:
+            type: string
+      summary: Parse and Return MRC721Protocol Data
+      tags:
+      - mrc20
+  /mrc20/mrc721collections:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a list of collections associated with a given MRC-721
+        name
+      parameters:
+      - description: MRC-721 name to query collections
+        in: query
+        name: mrc721name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of MRC-721 collections
+          schema:
+            $ref: '#/definitions/rpc.GetMrc721CollectionsResult'
+        "501":
+          description: Error message if retrieval fails
+          schema:
+            $ref: '#/definitions/rpc.GetMrc721CollectionsResult'
+      summary: Retrieve MRC-721 collections by name
+      tags:
+      - mrc20
+  /mrc20/mrcallinscription:
+    get:
+      consumes:
+      - application/json
+      description: associated inscription data, genesis data, and the relevant MRC-20
+        or MRC-721 protocol details. MrcType(mrc721,mrc20,unknown,inscription)
+      parameters:
+      - description: Inscription ID
+        in: query
+        name: inscriptionId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Detailed information about the MRC inscription
+          schema:
+            $ref: '#/definitions/rpc.WebMrcAllInscriptionResult'
+        "400":
+          description: Error message if the inscription ID is not provided or invalid
+          schema:
+            type: string
+        "501":
+          description: Error message if there's an internal error during data retrieval
+          schema:
+            type: string
+      summary: Retrieve detailed information about a specific MRC inscription
+      tags:
+      - mrc20
+  /mrc20/onemrc721:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a single MRC-721 genesis inscription based on the provided
+        name
+      parameters:
+      - description: MRC-721 Name
+        in: query
+        name: mrc721Name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: MRC-721 genesis inscription
+          schema:
+            $ref: '#/definitions/satmine.Mrc721GenesisDataWeb'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Retrieve a single MRC-721 genesis inscription
+      tags:
+      - mrc20
+  /mrc20/postrecord:
+    post:
+      consumes:
+      - application/json
+      description: Writes a new record with an incrementing index to the database
+      parameters:
+      - description: Address identifier
+        in: query
+        name: address
+        required: true
+        type: string
+      - description: Record type identifier
+        in: query
+        name: rectype
+        required: true
+        type: string
+      - description: Message content to be stored
+        in: body
+        name: message
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message with code and message text
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Error message with code and message text
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Write a record to the database
+      tags:
+      - record
+  /mrc20/scanmissingblocks:
+    get:
+      consumes:
+      - application/json
+      description: Scans the blockchain database from a starting block to an ending
+        block and retrieves a list of missing block numbers
+      parameters:
+      - description: Begin Block Number
+        in: query
+        name: begin
+        required: true
+        type: integer
+      - description: End Block Number
+        in: query
+        name: end
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of missing block numbers
+          schema:
+            $ref: '#/definitions/rpc.ScanMissingBlocksResult'
+        "400":
+          description: Error message if retrieval fails
+          schema:
+            type: string
+      summary: Scans and retrieves a list of missing block numbers
+      tags:
+      - mrc20
+  /mrc20/validatename:
+    get:
+      consumes:
+      - application/json
+      description: Checks if a given MRC721 or MRC20 name exists in the database
+      parameters:
+      - description: Name to validate
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: Kind of token ('mrc721' or 'mrc20')
+        in: query
+        name: kind
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Response with validation result and message
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Error message if validation fails
+          schema:
+            type: string
+      summary: Validate MRC721 or MRC20 name
+      tags:
+      - mrc20
+swagger: "2.0"

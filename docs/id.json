@@ -1,0 +1,18 @@
+{
+    "address": "tb1p9eqv46j98x0k84tmfgeuhz9e0w8xt85rfgmfyn40p59vqj8sa7eqlwzc9e",
+    "children": [],
+    "content_length": 53,
+    "content_type": "text/plain;charset=utf-8",
+    "genesis_fee": 237,
+    "genesis_height": 2539210,
+    "inscription_id": "5b597f41e572ebb64ac52cdac8ddc7fdde3c99e0122f20c4f2a33eeca47ba917i0",
+    "inscription_number": 571710,
+    "next": "5120396fd251c2f923e04aa4106db3a03e67d2315006324bd1d087c39fa7cf35i0",
+    "output_value": 330,
+    "parent": null,
+    "previous": "1d0808668f6491d32cdd00335d8864662f5ba6122dffb91d34644a1d840494efi0",
+    "rune": null,
+    "sat": 1484442154693078,
+    "satpoint": "58e55ab563b3e64ea3e51d45b09a0191d509ce9f5c50ad8564bf3a6a51d11595:0:228",
+    "timestamp": 1700375967
+}
